@@ -1,5 +1,26 @@
-syntax = "proto3"
+syntax = "proto3";
 
-message Login{
-    int32
+message Login {
+	int32 Login = 1;
+	string Password = 2;
+}
+
+message LoginReply {
+	oneof LoginReplyMessage {
+		bool LoginType = 1;
+		string LoginMessage = 2;
+	}
+}
+
+message Move {
+	int32 Type = 1;
+	repeated int32 direction = 2;
+}
+
+message Empty {
+}
+
+service GatawaySrv {
+	rpc LoginAction (Login) returns (LoginReply);
+	rpc MoveAction (Move) returns (Empty);
 }
